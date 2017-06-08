@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 
 
-class Crawler:
+class RUCrawler:
 
     def __init__(self, url):
         self.soup = BeautifulSoup(requests.get(url).content, 'html.parser')
@@ -21,7 +21,7 @@ class Crawler:
         weekly_menu = ''
         for day in self.soup.find_all('tr')[1:6]:
             daily_menu, day = day.find_all('td')[1:], day.find('td')
-            weekly_menu += '\n\n*%s* - %s' % (
+            weekly_menu += '\n\n*{}* - {}'.format(
                 day.get_text(),
                 ', '.join([item.get_text() for item in daily_menu])
             )
@@ -30,5 +30,5 @@ class Crawler:
     def get_menu(self, message):
         command = message.split('@')[0]
         if command not in self.commands:
-            return None
+            raise Exception('Invalid command {}'.format(command))
         return self.commands[command]()
