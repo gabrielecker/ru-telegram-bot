@@ -2,7 +2,10 @@
 Telegram Bot made to get information from http://ru.ufsc.br/ru/ and send through chats.
 
 ## Commands
-Currently the only command is '/hoje' which returns the menu from the day.
+Currently commands supported by the bot:
+* /hoje - returns the menu from the day
+* /semana - returns the menu from the week
+
 Working on more and open to advices.
 
 ### License
