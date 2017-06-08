@@ -1,33 +1,31 @@
 import os
-import time
-from functions import get_daily_menu
-from telepot import Bot, glance
-from telepot.loop import MessageLoop
+import asyncio
+from functions import Crawler
+from telepot import glance
+from telepot.aio import Bot
+from telepot.aio.loop import MessageLoop
 
 
 TOKEN = os.environ['TELEGRAM_TOKEN']
 API_URL = 'https://api.telegram.org/bot{}/'.format(TOKEN)
-COMMANDS = {
-    '/hoje': get_daily_menu,
-    # ...
-}
+crawler = Crawler('http://ru.ufsc.br/ru/')
 bot = Bot(TOKEN)
 
 
-def handle(msg):
+async def handle(msg):
     content_type, chat_type, chat_id = glance(msg)
 
     if content_type != 'text':
         return
 
-    command = msg['text'].split('@')[0]
-    if command in COMMANDS:
-        menu = COMMANDS[command]()
-        bot.sendMessage(chat_id, 'Cardápio do dia:{}.'.format(menu))
+    menu_items = crawler.get_menu(msg['text'])
 
+    if menu_items:
+        await bot.sendMessage(chat_id, 'Cardápio: {}.'.format(menu_items),
+                              parse_mode='Markdown')
 
 if __name__ == '__main__':
-    MessageLoop(bot, handle).run_as_thread()
-
-    while True:
-        time.sleep(10)
+    loop = asyncio.get_event_loop()
+    loop.create_task(MessageLoop(bot, handle).run_forever())
+    print('Listening...')
+    loop.run_forever()
