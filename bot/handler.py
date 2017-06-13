@@ -1,4 +1,3 @@
-import asyncio
 from bot.logger import logger
 from bot.settings import TOKEN
 from crawler.db import get_menu
@@ -6,7 +5,6 @@ from telepot import glance
 from telepot.aio import Bot
 
 bot = Bot(TOKEN)
-loop = asyncio.get_event_loop()
 
 
 async def handle(msg):
