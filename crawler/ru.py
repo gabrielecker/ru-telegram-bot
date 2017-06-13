@@ -17,7 +17,7 @@ def get_daily_menu():
     redis.set('/hoje', daily_menu)
 
 
-@sched.scheduled_job('cron', day_of_week='mon', hour=4)
+@sched.scheduled_job('cron', day_of_week='mon-fri', hour=4)
 def get_weekly_menu():
     weekly_menu = ''
     for day in soup.find_all('tr')[1:6]:
