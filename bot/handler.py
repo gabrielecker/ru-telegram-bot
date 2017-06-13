@@ -1,7 +1,7 @@
 import asyncio
-from bot.db import get_menu
 from bot.logger import logger
 from bot.settings import TOKEN
+from crawler.db import get_menu
 from telepot import glance
 from telepot.aio import Bot
 
