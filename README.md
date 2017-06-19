@@ -1,10 +1,15 @@
 # RU Telegram Bot
 Telegram Bot made to get information from http://ru.ufsc.br/ru/ and send through chats.
+To use it just type @RUfsc_bot and wait for the options to appear.
 
 ## Commands
-Currently commands supported by the bot:
-* /hoje - returns the menu from the day
-* /semana - returns the menu from the week
+Currently commands supported via plain chat text:
+* /start Shows start message
+* /help Shows help message
+
+Currently actions supported via <a href="https://core.telegram.org/bots/inline">inline query</a>:
+* Check the weekly menu
+* Check the daily menu
 
 Working on more and open to advices.
 
