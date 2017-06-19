@@ -30,14 +30,14 @@ def on_inline_query(msg):
             InlineQueryResultArticle(
                 id='hoje', title='Cardápio de hoje',
                 input_message_content=InputTextMessageContent(
-                    message_text=get_menu('/hoje'),
+                    message_text=get_menu('hoje'),
                     parse_mode='Markdown'
                 )
             ),
             InlineQueryResultArticle(
                 id='semana', title='Cardápio da semana',
                 input_message_content=InputTextMessageContent(
-                    message_text=get_menu('/semana'),
+                    message_text=get_menu('semana'),
                     parse_mode='Markdown'
                 )
             )

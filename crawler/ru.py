@@ -14,7 +14,7 @@ def get_daily_menu():
     today = datetime.today().weekday() + 1
     items = soup.find_all('tr')[today].find_all('td')[1:]
     items[2].string = '*{}*'.format(items[2].string)
-    daily_menu = ', '.join([item.get_text() for item in items])
+    daily_menu = ', '.join([item.get_text().strip() for item in items])
     redis.set('hoje', daily_menu)
 
 
@@ -25,7 +25,7 @@ def get_weekly_menu():
         daily_menu, day = day.find_all('td')[1:], day.find('td')
         daily_menu[2].string = '*{}*'.format(daily_menu[2].string)
         weekly_menu += '\n\n*{}* - {}'.format(
-            day.get_text(),
-            ', '.join([item.get_text() for item in daily_menu])
+            day.get_text().capitalize(),
+            ', '.join([item.get_text().strip() for item in daily_menu])
         )
     redis.set('semana', weekly_menu)
