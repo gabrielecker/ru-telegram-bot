@@ -3,11 +3,13 @@
 
 
 def help():
-    return 'Texto de ajuda a ser construído para o comando /help'
+    return 'Para usar o bot é preciso apenas chama-lo em qualquer chat utiliza\
+ndo @RUfsc_bot e aguardar aparecer o menu de opções.'
 
 
 def start():
-    return 'Texto de início a ser construído para o comando /start'
+    return 'Bot para remover a necessidade de acessar o site do RU para ver o \
+cardápio todos os dias, coleta informações diretamente do site.'
 
 
 def settings():
