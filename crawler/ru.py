@@ -1,9 +1,10 @@
 import requests
+from apscheduler.schedulers.blocking import BlockingScheduler
 from bot.settings import RU_URL
 from bs4 import BeautifulSoup
 from crawler.db import redis
 from datetime import datetime
-from apscheduler.schedulers.blocking import BlockingScheduler
+
 
 sched = BlockingScheduler()
 soup = BeautifulSoup(requests.get(RU_URL).content, 'html.parser')
@@ -22,10 +23,10 @@ def get_daily_menu():
 def get_weekly_menu():
     weekly_menu = ''
     for day in soup.find_all('tr')[1:6]:
-        daily_menu, day = day.find_all('td')[1:], day.find('td')
+        daily_menu, week_day = day.find_all('td')[1:], day.find('td')
         daily_menu[2].string = '*{}*'.format(daily_menu[2].string)
         weekly_menu += '\n\n*{}* - {}'.format(
-            day.get_text().capitalize(),
-            ', '.join([item.get_text().strip() for item in daily_menu])
+            week_day.get_text().capitalize(),
+            ', '.join([item.get_text() for item in daily_menu])
         )
     redis.set('semana', weekly_menu)
