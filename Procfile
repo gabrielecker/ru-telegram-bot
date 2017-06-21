@@ -1,2 +1,2 @@
-bot: python3 bot.py
-clock: python3 scheduler.py
+bot: python3 bot/bot.py
+clock: python3 crawler/scheduler.py
