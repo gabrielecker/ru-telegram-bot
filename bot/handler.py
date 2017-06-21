@@ -1,3 +1,4 @@
+import asyncio
 from bot import commands
 from bot.logger import logger
 from bot.settings import TOKEN, DEFAULT_COMMANDS
@@ -5,6 +6,7 @@ from crawler.db import get_menu
 from telepot import glance
 from telepot.aio import Bot
 from telepot.aio.helper import Answerer
+from telepot.aio.loop import MessageLoop
 from telepot.namedtuple import InlineQueryResultArticle
 from telepot.namedtuple import InputTextMessageContent
 
@@ -52,3 +54,14 @@ def on_chosen_inline_result(msg):
                                               flavor='chosen_inline_result')
     logger.info('Chosen Inline Result: %s, %s, %s',
                 result_id, from_id, query_string)
+
+
+def main():
+    loop = asyncio.get_event_loop()
+    loop.create_task(MessageLoop(bot, {
+        'chat': on_message,
+        'inline_query': on_inline_query,
+        'chosen_inline_result': on_chosen_inline_result
+    }).run_forever())
+    print('Listening...')
+    loop.run_forever()
