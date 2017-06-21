@@ -2,7 +2,8 @@ import asyncio
 from bot import commands
 from bot.logger import logger
 from bot.settings import TOKEN, DEFAULT_COMMANDS
-from crawler.db import get_menu
+from crawler.db import get_daily_menu, get_weekly_menu
+from datetime import datetime
 from telepot import glance
 from telepot.aio import Bot
 from telepot.aio.helper import Answerer
@@ -28,18 +29,19 @@ async def on_message(msg):
 def on_inline_query(msg):
     def compute():
         query_id, from_id, query_string = glance(msg, flavor='inline_query')
+        day = datetime.today().weekday()
         articles = [
             InlineQueryResultArticle(
                 id='hoje', title='Cardápio de hoje',
                 input_message_content=InputTextMessageContent(
-                    message_text=get_menu('hoje'),
+                    message_text=get_daily_menu(day),
                     parse_mode='Markdown'
                 )
             ),
             InlineQueryResultArticle(
                 id='semana', title='Cardápio da semana',
                 input_message_content=InputTextMessageContent(
-                    message_text=get_menu('semana'),
+                    message_text=get_weekly_menu(),
                     parse_mode='Markdown'
                 )
             )

@@ -3,30 +3,20 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 from bot.settings import RU_URL
 from bs4 import BeautifulSoup
 from crawler.db import redis
-from datetime import datetime
 
 
 sched = BlockingScheduler()
-soup = BeautifulSoup(requests.get(RU_URL).content, 'html.parser')
 
 
-@sched.scheduled_job('cron', day_of_week='mon-fri', hour=4)
-def get_daily_menu():
-    today = datetime.today().weekday() + 1
-    items = soup.find_all('tr')[today].find_all('td')[1:]
-    items[2].string = '*{}*'.format(items[2].string)
-    daily_menu = ', '.join([item.get_text().strip() for item in items])
-    redis.set('hoje', daily_menu)
+@sched.scheduled_job('cron', day_of_week='mon-fri', hour=8)
+def get_menu():
+    soup = BeautifulSoup(requests.get(RU_URL).content, 'html.parser')
 
-
-@sched.scheduled_job('cron', day_of_week='mon-fri', hour=4)
-def get_weekly_menu():
-    weekly_menu = ''
-    for day in soup.find_all('tr')[1:6]:
-        daily_menu, week_day = day.find_all('td')[1:], day.find('td')
-        daily_menu[2].string = '*{}*'.format(daily_menu[2].string)
-        weekly_menu += '\n\n*{}* - {}'.format(
+    for index, item in enumerate(soup.find_all('tr')[1:6]):
+        week_day, daily_menu = item.find('td'), item.find_all('td')[1:]
+        daily_menu[2].string = '*{}*'.format(daily_menu[2].string.strip())
+        daily_menu = '*{}* - {}'.format(
             week_day.get_text().capitalize(),
-            ', '.join([item.get_text() for item in daily_menu])
+            ', '.join([item.get_text().strip() for item in daily_menu])
         )
-    redis.set('semana', weekly_menu)
+        redis.set(index, daily_menu)
