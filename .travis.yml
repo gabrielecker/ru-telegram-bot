@@ -1,0 +1,12 @@
+language: python
+python: 3.5
+install:
+- pip install flake8
+script:
+- make clean
+- make init
+- make lint
+deploy:
+  provider: heroku
+  api_key:
+    secure: QlFe2k+iSWfnfjKSh0edxaK+hFSZOZx2q9llr5JB+7RmYX2pZviuA6fM7mFFE5iAXmOlygMuMe72QdXOlNhEpPX9rEU/7sAC2KnvOdPt3L5qua0n8EfeIzINPA/kWtX6mMKjZhntj1iX27BoQ4Nr/5WotdCyFvcNG8MOtdmjET9+s956VuzbiMJk1Sis/1JVr6PA1JOix24xs4vJitcMNxiHNDYM7phDTtZZ07QraZyemiujUavyp/X2BUQyBzM0xgL+4JHzlGA4RTN3KfOeJfDAcAii37+FLVpkovMb0/9FnNz/FERw2rAHVhtKnaAi9Ufl1y/i68AUJbNfXAHlsdATe9BHCDNBtX9X2ba7m4dMQgRTrAEQ7PrBRRSt+QydO+7Ba/p61pI71MEOf1aZ2Y2TXhZXCJjoZ9XhRiYGvZVAGaZCXuvONn3Yp89oItR6xUwX9UXbWz60elfCPx8xWv7glQhESk64Rpg4dDbIXK6NCDIQoOtKyxpWx+fPlhpD0U0vFZv0ku/Wga4AvFrl0hwro9iS4uNYyGKnHlmzrB/764VmzvHBwmptYLpY/PJrrPlY40I5YZ6IhdpyXdtIhinYpZ5NAV70ijzs17BGXnuBC0089hAcREYy/rREs5+6mxj6BJAY2sxiqccNJq9Fc6P9BUxOBd4JLfMli3YSxPY=
