@@ -1,4 +1,6 @@
 # RU Telegram Bot
+<img src="https://travis-ci.org/gabrielecker/ru-telegram-bot.svg?branch=master">
+
 Telegram Bot made to get information from http://ru.ufsc.br/ru/ and send through chats.
 To use it just type @RUfsc_bot and wait for the options to appear.
 
