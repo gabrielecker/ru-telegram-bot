@@ -1,2 +1,2 @@
-bot: python3 bot.py
-clock: python3 scheduler.py
+bot: python3 scripts/bot.py
+clock: python3 scripts/scheduler.py

@@ -17,12 +17,12 @@ answerer = Answerer(bot)
 
 async def on_message(msg):
     content_type, chat_type, chat_id = glance(msg)
-    command = msg.get('text').split('@')[0].replace('/', '')
-    logger.info('message sent: %s - %s', msg.get('text'), chat_id)
+    command = msg.get('text').split('@')[0].replace('/', '') or None
 
     if content_type != 'text' or command not in DEFAULT_COMMANDS:
         return None
 
+    logger.info('message sent: %s - %s', msg.get('text'), chat_id)
     await bot.sendMessage(chat_id, getattr(commands, command)())
 
 

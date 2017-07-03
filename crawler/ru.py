@@ -9,7 +9,7 @@ from crawler.db import redis
 sched = BlockingScheduler()
 
 
-@sched.scheduled_job('cron', day_of_week='mon-fri', hour=8)
+@sched.scheduled_job('cron', day_of_week='mon-fri', hour=10)
 def get_menu():
     page = requests.get(RU_URL)
     if page.status_code != 200:
