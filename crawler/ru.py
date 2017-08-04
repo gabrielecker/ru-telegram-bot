@@ -31,9 +31,10 @@ def format_menu(index, day, items):
     return daily_menu
 
 
-@sched.scheduled_job('cron', day_of_week='mon-fri', hour=10)
+@sched.scheduled_job('cron', day_of_week='mon-fri', hour=11)
 def get_menu():
     page = requests.get(RU_URL)
+
     if page.status_code != 200:
         logger.warning('RU page was unavailable for some unknown reason')
         return None
@@ -44,5 +45,4 @@ def get_menu():
 
     for index in range(5):
         week_day = soup.find_all('tr')[index + 1].find('td')
-        print(index, format_menu(index, week_day, items))
-        # redis.set(index, format_menu(index, week_day, items))
+        redis.set(index, format_menu(index, week_day, items))
