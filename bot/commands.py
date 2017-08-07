@@ -1,16 +1,33 @@
-# File to handle simple commands recommended by Telegram
-# Update in the future with useful information
+"""
+This module holds the command class
+"""
 
 
-def help():
-    return 'Para usar o bot é preciso apenas chama-lo em qualquer chat utiliza\
-ndo @RUfsc_bot e aguardar aparecer o menu de opções.'
+class Command():
+    """
+    This class has static methods to handle the minimum commands
+    recommended by Telegram
+    """
+    @staticmethod
+    def help():
+        """
+        This static method returns the message for users '/help' call in chats
+        """
+        return 'Para usar o bot é preciso apenas chama-lo em qualquer chat ut\
+ilizando @RUfsc_bot e aguardar aparecer o menu de opções.'
 
+    @staticmethod
+    def start():
+        """
+        This static method returns the message for users '/start' call in chats
+        """
+        return 'Bot para remover a necessidade de acessar o site do RU para v\
+er o cardápio todos os dias, coleta informações diretamente do site.'
 
-def start():
-    return 'Bot para remover a necessidade de acessar o site do RU para ver o \
-cardápio todos os dias, coleta informações diretamente do site.'
-
-
-def settings():
-    pass
+    @staticmethod
+    def settings():
+        """
+        This static method returns the message for users
+        '/settings' call in chats
+        """
+        pass

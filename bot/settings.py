@@ -1,3 +1,6 @@
+"""
+This module holds the settings shared by other modules
+"""
 import logging
 from decouple import config
 

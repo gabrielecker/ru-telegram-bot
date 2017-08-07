@@ -1,7 +1,8 @@
 [flake8]
 ignore =
     # H301: one import per line
-    H301
+    H301,
+    C0103
 exclude =
     .git,
     __pycache__
