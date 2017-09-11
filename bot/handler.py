@@ -59,6 +59,7 @@ def on_inline_query(msg):
         articles = [
             InlineQueryResultArticle(
                 id='hoje', title='Cardápio de hoje',
+                thumb_url='../images/corgi.jpg',
                 input_message_content=InputTextMessageContent(
                     message_text=get_daily_menu(day),
                     parse_mode='Markdown'
@@ -66,6 +67,7 @@ def on_inline_query(msg):
             ),
             InlineQueryResultArticle(
                 id='semana', title='Cardápio da semana',
+                thumb_url='../images/dachshund.jpg',
                 input_message_content=InputTextMessageContent(
                     message_text=get_weekly_menu(),
                     parse_mode='Markdown'
@@ -94,11 +96,12 @@ def main():
     """
     This function is responsible for maintaining the main thread alive
     """
-    loop = asyncio.get_event_loop()
-    loop.create_task(MessageLoop(BOT, {
+    handlers = {
         'chat': on_message,
         'inline_query': on_inline_query,
         'chosen_inline_result': on_chosen_inline_result
-    }).run_forever())
+    }
+    loop = asyncio.get_event_loop()
+    loop.create_task(MessageLoop(BOT, handlers).run_forever())
     LOGGER.info('Listening...')
     loop.run_forever()
