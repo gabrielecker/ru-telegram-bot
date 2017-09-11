@@ -59,7 +59,7 @@ def on_inline_query(msg):
         articles = [
             InlineQueryResultArticle(
                 id='hoje', title='Cardápio de hoje',
-                thumb_url='../images/corgi.jpg',
+                thumb_url='https://i.imgur.com/jcggDJ9.jpg',
                 input_message_content=InputTextMessageContent(
                     message_text=get_daily_menu(day),
                     parse_mode='Markdown'
@@ -67,7 +67,7 @@ def on_inline_query(msg):
             ),
             InlineQueryResultArticle(
                 id='semana', title='Cardápio da semana',
-                thumb_url='../images/dachshund.jpg',
+                thumb_url='https://i.imgur.com/RfS7QSj.jpg',
                 input_message_content=InputTextMessageContent(
                     message_text=get_weekly_menu(),
                     parse_mode='Markdown'
