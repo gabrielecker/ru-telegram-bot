@@ -54,7 +54,7 @@ def format_menu(day, menu):
     return formatted_menu
 
 
-@SCHED.scheduled_job('cron', day_of_week='mon-fri', hour=11)
+@SCHED.scheduled_job('cron', day_of_week='mon-fri', hour=12)
 def get_menu():
     """
     This function is scheduled to run daily and save the menu information
