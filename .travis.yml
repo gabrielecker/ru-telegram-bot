@@ -3,10 +3,7 @@ python: 3.6
 install:
 - pip install flake8
 script:
-- make clean
-- make init
-- make lint
-- python -m pytest
+- make clean init test lint
 deploy:
   provider: heroku
   api_key:
