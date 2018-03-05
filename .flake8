@@ -7,3 +7,4 @@ exclude =
     .git,
     __pycache__
 max-complexity = 10
+max-line-length = 100
